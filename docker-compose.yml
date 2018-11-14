@@ -46,7 +46,10 @@ services:
     networks:
       - queen
 
+<<<<<<< ours
 
+=======
+>>>>>>> theirs
 volumes:
   queen_db:
   slave1_db:

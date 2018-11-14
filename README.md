@@ -15,15 +15,24 @@ Kudu is an open source storage engine for structured data which supports low-lat
 
 ## Startup 
 
+<<<<<<< ours
 1. use docker composer to start 1 queen(master) and 3 slaves(tablet/region servers)
 ```bash
 docker-compose up 
 ```
 or as deamon
+=======
+### Start 1 queen(master) and 3 slaves(tablet/region servers)
+```bash
+docker-compose up 
+```
+### as deamon:
+>>>>>>> theirs
 ```bash
 docker-compose up -d
 ```
 
+<<<<<<< ours
 2.
 for testing excecute the file test.sh or  
 ```bash
@@ -42,6 +51,8 @@ docker network list
 
 
 
+=======
+>>>>>>> theirs
 
 
 ### Web UI
