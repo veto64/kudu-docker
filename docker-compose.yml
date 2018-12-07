@@ -1,5 +1,4 @@
 version: '3.3'
-
 services:
   queen:
     image: veto64/kudu-docker
@@ -45,11 +44,6 @@ services:
       - slave3_db:/data
     networks:
       - queen
-
-<<<<<<< ours
-
-=======
->>>>>>> theirs
 volumes:
   queen_db:
   slave1_db:
