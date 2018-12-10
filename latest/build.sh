@@ -1,1 +1,1 @@
-docker build -t veto64/kudu-docker2 .
+docker build -t veto64/kudu-docker:latest .
