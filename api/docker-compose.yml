@@ -47,7 +47,7 @@ services:
       - queen
 
   api:
-    image: veto64/restful-kudu-docker
+    image: veto64/kudu-docker:api
     container_name: api
     volumes: 
      - "./api:/opt/api/"

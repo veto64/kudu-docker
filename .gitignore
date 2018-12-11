@@ -61,5 +61,7 @@ typings/
 env
 venv
 *~
+__pycache__
+
 
 

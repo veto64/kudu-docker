@@ -31,8 +31,12 @@ class Table:
      'table': table,
      'success': False
      }
-    data   = json.load(req.bounded_stream)
+    data = json.loads(req.bounded_stream.read().decode("utf-8"))
+    
+    
+
     client = kudu.connect(host='queen', port=7051)
+
     if not client.table_exists(table): 
       builder = kudu.schema_builder()
       builder.add_column('_id').type(kudu.int64).nullable(False).primary_key()
