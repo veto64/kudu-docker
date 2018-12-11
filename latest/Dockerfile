@@ -50,9 +50,8 @@ ack-grep
 WORKDIR /
 RUN git clone https://github.com/apache/kudu  \
 && cd /kudu \ 
-&& thirdparty/build-if-necessary.sh 
-
-RUN cd /kudu &&  mkdir -p build/release \
+&& thirdparty/build-if-necessary.sh \ 
+&& mkdir -p build/release \
 && cd /kudu/build/release \
 && ../../thirdparty/installed/common/bin/cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX:PATH=/usr ../.. \
 && make -j4 \

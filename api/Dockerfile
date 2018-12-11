@@ -1,40 +1,72 @@
-FROM debian:jessie
+FROM debian:latest
 
-# Install dependencies and tools
-RUN apt-get update && apt-get -y install apt-utils \ 
-wget \ 
-dstat \ 
+# Install dependencies
+RUN apt-get update && export DEBIAN_FRONTEND=noninteractive && \ 
+apt-get -y install apt-utils \
 aptitude \ 
-ntp \ 
+autoconf \ 
+automake \ 
+curl \ 
+dstat \
 emacs24-nox \
+flex \ 
+g++ \ 
+gcc \ 
+gdb \ 
+git \ 
+krb5-admin-server \ 
+krb5-kdc \ 
+krb5-user \ 
+libkrb5-dev \  
+libsasl2-dev \ 
+libsasl2-modules \ 
+libsasl2-modules-gssapi-mit \ 
+libssl-dev \ 
+libtool \ 
+lsb-release \ 
+make \ 
+ntp \ 
 net-tools \
+openjdk-8-jdk \ 
+openssl \ 
+patch \ 
 python-dev \
 python-pip \
-curl 
-
-# Install repository and gpg key
-WORKDIR /etc/apt/sources.list.d
-RUN wget https://archive.cloudera.com/kudu/debian/jessie/amd64/kudu/archive.key -O archive.key
-RUN apt-key add archive.key
-RUN rm archive.key
-RUN wget http://archive.cloudera.com/kudu/debian/jessie/amd64/kudu/cloudera.list
-
-# Install Kudu # Kudu C++ client shared library # Kudu C++ client SDK
-RUN apt-get update && apt-get -y install libkuduclient0  \ 
-libkuduclient-dev \ 
-libkrb5-dev  
+python3-dev \
+python3 \
+python3-pip \
+pkg-config \ 
+python \ 
+rsync \ 
+unzip \ 
+vim-common \
+wget \ 
+ack-grep 
 
 
-RUN pip install setuptools --upgrade 
-RUN pip install cython 
-RUN pip install cython kudu-python==1.2.0 \ 
+#Install Kudu
+WORKDIR /
+RUN git clone https://github.com/apache/kudu  \
+&& cd /kudu \ 
+&& thirdparty/build-if-necessary.sh \
+&& mkdir -p build/release \
+&& cd /kudu/build/release \
+&& ../../thirdparty/installed/common/bin/cmake -DCMAKE_BUILD_TYPE=release -DCMAKE_INSTALL_PREFIX:PATH=/usr ../.. \
+&& make -j4 \
+&& cd /kudu/build/release \ 
+&& make install \
+&& rm /kudu -Rf
+
+
+#Setup Python Client
+RUN pip3 install setuptools --upgrade  \
+&& pip3 install cython \ 
+&& pip3 install kudu-python \
 falcon \ 
 gunicorn \ 
 PyYAML \ 
 falcon-cors \ 
 sortedcontainers
-
-
 
 EXPOSE 80
 COPY ./docker-entrypoint.sh /
