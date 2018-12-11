@@ -14,7 +14,7 @@ Kudu is an open source storage engine for structured data which supports low-lat
 [http://kudu.apache.org/](http://kudu.apache.org/)
 
 ## Dockers
-### There 3 kudu dockers:
+### There are 3 kudu dockers:
 1. veto64/kudu-docker:14 (old kudu version 14)
 2. veto64/kudu-docker:latest (the latest from the git source repository)
 3. veto64/kudu-docker:api (REST API, to interact with kudu engine, based on the python API framework Falcon)
