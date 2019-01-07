@@ -39,7 +39,7 @@ class Table:
 
     if not client.table_exists(table): 
       builder = kudu.schema_builder()
-      builder.add_column('_id').type(kudu.int64).nullable(False).primary_key()
+      builder.add_column('_id').type(kudu.string).nullable(False).primary_key()
 
       if data:
         for i in data:

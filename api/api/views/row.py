@@ -19,6 +19,7 @@ class Row:
      'errors'  : []
      }
     client = kudu.connect(host='queen', port=7051)
+
     if client.table_exists(table):
       if row.isdigit():
         row_id  = int(row)
@@ -48,41 +49,33 @@ class Row:
     if client.table_exists(table): 
       tb = client.table(table)
       sm = tb.schema
-      data   = json.load(req.bounded_stream)
+      data = json.loads(req.bounded_stream.read().decode("utf-8"))
       table   = client.table(table)
       schema = {}      
       for i in sm:
         schema[i.name] = i.type.name
-
-
       scanner = table.scanner()
-      #scanner.set_limit(1) #no supported with 1.2
-      api['scanner'] = dir(scanner)
+      scanner.set_limit(1) 
       #scanner.add_predicate(table['_id'] == row_id )
-      print('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
-      print(schema)
-      print('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
+      op = table.new_insert()   
+      if not '_id' in data:
+        op['_id'] = 'xxxx'
+      for i in data:
+        if i in schema:
+          print('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
+          print(data[i])
+          print('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
+          print('xxxxxxxxxxxxxxxxxxxxxxxxxxx')
 
+      op['_id'] = 1
+      op['style'] = 'xxxx'
 
+      #session.apply(op)
+      #session.flush()
 
-      """
-      if row.isdigit():
-        api['update'] = True
-      else:
-        #adpi['dir-table'] = dir(table)
-        op = table.new_insert()
-        op['_id'] = uuid.uuid4().int>>1
- 
-        op['style'] = 'xxxx'
-        op['qty'] = 1
-        op['cost'] = 1
-        op['price'] = 1
-        op['hash'] = 'xxxxx'
-        session.apply(op)
-        session.flush()
-        api['success'] = True
-        api['insert'] = True
-       """
+      api['success'] = True
+      api['insert'] = True
+
     else:
       api['errors'].append('Table does not exist')
 
