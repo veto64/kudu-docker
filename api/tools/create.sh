@@ -3,11 +3,11 @@
 <<EOF
 
 bash examples:
-./create.sh stock '{"style":"string","qty":"int","cost":"float","price":"float","weight":"float","date":"int","hash":"string"}'
+./create.sh stock '{"style":"string","qty":"int","cost":"float","price":"float","weight":"float","date":"time","hash":"string"}'
 
 curl examples:
 curl -X PUT http://127.0.0.1/stock
-curl -X PUT http://127.0.0.1/stock -d '{"style":"string","qty":"int","cost":"float","price":"float","hash":"string"}'
+curl -X PUT http://127.0.0.1/stock -d {"style":"string","qty":"int","cost":"float","price":"float","weight":"float","date":"time","hash":"string"}'
 
 EOF
 

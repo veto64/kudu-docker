@@ -32,8 +32,6 @@ class Table:
      'success': False
      }
     data = json.loads(req.bounded_stream.read().decode("utf-8"))
-    
-    
 
     client = kudu.connect(host='queen', port=7051)
 
