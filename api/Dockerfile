@@ -66,7 +66,8 @@ falcon \
 gunicorn \ 
 PyYAML \ 
 falcon-cors \ 
-sortedcontainers
+sortedcontainers \
+jinja2 
 
 EXPOSE 80
 COPY ./docker-entrypoint.sh /

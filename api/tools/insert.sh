@@ -6,7 +6,7 @@ bash examples:
 ./insert.sh stock '{"style":"string","qty":"int","cost":"float","price":"float","weight":"float","date":"int","hash":"string"}'
 
 curl examples:
-curl -X PUT http://127.0.0.1/stock/row -d '{"style":"aaaa","qty":1,"cost":5,"price":4}'
+curl -X PUT http://127.0.0.1/stock/row -d '{"style":"14B-1.6-3","qty":17,"cost":0,"price":0}'
 
 EOF
 

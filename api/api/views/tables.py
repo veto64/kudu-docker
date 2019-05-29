@@ -14,6 +14,7 @@ class Tables:
    self.api = {
       '_API' : 'tables',
       'method' : '',
+      'status': 'http://127.0.0.1:8051',
       'tables': {}
     }
 

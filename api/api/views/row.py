@@ -20,10 +20,11 @@ class Row:
     client = kudu.connect(host='queen', port=7051)
 
     if client.table_exists(table):
+      print('...table exists',table)
       row_id  = row
       table   = client.table(table)
       scanner = table.scanner()
-      #api['scanner'] = dir(scanner)
+      api['scanner'] = dir(scanner)
       scanner.add_predicate(table['_id'] == row_id )
       ret = scanner.open().read_all_tuples()
       api['ret'] = ret
@@ -33,6 +34,7 @@ class Row:
     res.status = falcon.HTTP_200
 
   def on_put(self, req, res,table,row):
+    print('...put new row')
     api = {
      'table'  : table,
      'errors' : [],
